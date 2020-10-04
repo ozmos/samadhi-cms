@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+    php-httpd:
+        build:
+            context: ./php-httpd
+        ports:
+            - 80:80
+        volumes:
+            - "./osamu:/var/www/html"
+
+    mariadb:
+        image: mariadb:10.5.2
+        volumes:
+            - mariadb-volume:/var/lib/mysql
+        environment:
+            TZ: "Australia/Perth"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+            MYSQL_ROOT_PASSWORD: "rootpwd"
+            MYSQL_USER: 'osamu'
+            MYSQL_PASSWORD: 'osamupwd'
+            MYSQL_DATABASE: 'blog_db'
+
+    phpmyadmin:
+            image: phpmyadmin/phpmyadmin
+            links:
+                - 'mariadb:db'
+            ports:
+                - 8081:80
+
+volumes:
+    mariadb-volume:
