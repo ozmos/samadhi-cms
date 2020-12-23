@@ -8,11 +8,12 @@ services:
             - 80:80
         volumes:
             - "./osamu:/var/www/html"
-
+            - "./osamu/uploads:/var/www/html/uploads:rw"
     mariadb:
         image: mariadb:10.5.2
         volumes:
             - mariadb-volume:/var/lib/mysql
+
         environment:
             TZ: "Australia/Perth"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"

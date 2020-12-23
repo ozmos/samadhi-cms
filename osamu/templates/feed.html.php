@@ -1,20 +1,7 @@
 <?php 
-// set vars:
-// $page {
-//    id
-//    title
-//    description
-//    articles[
-//      title
-//      auth
-//      date
-//      id
-//      content
-//    ]
-// }
-include __DIR__ . '/../inc/header.html.php';
-include __DIR__ . '/../inc/nav.html.php'; 
-include __DIR__ . '/../lib/utility.php';
+
+include 'header.inc.html.php';
+include 'nav.inc.html.php'; 
 ?>
 <main class="outer flex wrap">
     <!-- left column -->
@@ -24,45 +11,47 @@ include __DIR__ . '/../lib/utility.php';
             <!-- article header -->
             <header class="article-header flex wrap">
                 <section>
-                    <h2 class="art-heading">
+                    <h1 class="art-heading">
                         <?php echo $page['title']; ?>
-                    </h2>
+                    </h1>
                 </section>
             </header>
-            <!-- display all posts -->
-            <?php
-      foreach ($page['articles'] as $preview) {
-        ?>
-            <article class="card">
-                <div class="article-header flex wrap">
-                    <section>
-                        <h2 class="art-heading">
-                            <?php echo $preview['title']; ?>
-                        </h2>
-                        <h3 class="art-subheading">
-                            <?php echo $preview['auth'] . ', ' . $preview['date']; ?>
-                        </h3>
-                    </section>
-                    
-                </div>
-                <section class="blog">
-                    <p>
-                        <?php 
           
-          echo exerpt($preview['content'], 400) . '<a class="hover-green-light" href="' . $preview['id'] . '.php"> ...Continue reading ' . $preview['title'] . '</a>'; 
+            <!-- display all posts -->
+            <section id="article-body">
+                
+                <?php
+            foreach ($articles as $preview) {
+            ?>
+                <article class="card">
+                    <div class="article-header flex wrap">
+                        <section>
+                            <h3 class="preview-heading">
+                                <?php echo $preview['title']; ?>
+                            </h3>
+                            <h4 class="art-subheading">
+                                <?php echo $preview['author'] . ', ' . $preview['date']; ?>
+                            </h4>
+                        </section>
+                    </div>
+                    <section class="blog">
+                        <p>
+                            <?php 
+          
+          echo markdown(excerpt($preview['content'], 400)) . '<a class="hover-green-light" href="?article=' . $preview['id'] . '"> ...Continue reading ' . $preview['title'] . '</a>'; 
           ?>
-                    </p>
-                </section>
-            </article>
-            <hr />
-            <?php
-      }
-      ?>
+                        </p>
+                    </section>
+                </article>
+                <hr />
+                <?php
+              }
+              ?>
         </article>
     </section>
     <!-- end left column -->
-    <?php include __DIR__ . '/../inc/aside.html.php'; ?>
+    <?php include 'aside.inc.html.php'; ?>
     <!-- end outer div and main -->
 </main>
-<hr class="divider" />
-<?php include __DIR__ . '/../inc/footer.html.php'; ?>
+<hr class="divider">
+<?php include 'footer.inc.html.php'; ?>

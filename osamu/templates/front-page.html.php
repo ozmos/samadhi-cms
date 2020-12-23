@@ -9,13 +9,13 @@
 //    content
 //    actions
 // }
-include __DIR__ . '/../inc/header.html.php';
-include __DIR__ . '/../inc/nav.html.php'; 
+include 'header.inc.html.php';
+include 'nav.inc.html.php';  
 ?>
 <!-- main -->
 <main class="outer flex wrap">
   <!-- left column -->
-    <section class="col-12">
+    <section class="col-9">
     <!-- main content -->
       <article class="blog-article card" id="content">
       <!-- article header -->
@@ -25,15 +25,18 @@ include __DIR__ . '/../inc/nav.html.php';
               <?php echo $page['title']; ?>
             </h2>
           </section>
+         <!-- Featured image -->
           <section class="image">
-            <img class="featured-img" src="images/<?php echo $page['img'];?>" alt="<?php echo $page['alt'];?>" height="660" width="990" />
+              <img class="featured-img" src="/content/images/sitting-meditation.jpg" alt="woman sitting in meditation" height="660" width="990" />
           </section>
         </header>
         <!-- article content -->
+        <!-- Blurb hard coded for simplicity-->
         <section id="article-body">
+            <p>Here you will find instruction on <em>mindfulness</em> and <em>meditation</em> from my own perspective. If you are just starting your journey into meditation I recommend starting with the guided meditation.</p>
+            <p>You may want to start by learning mindfulness of breathing or walking meditation. Take what you find useful or appealing from the articles here and put it to use in your own practice.</p>
           <?php 
-          echo $page['content']; 
-          if ($page['actions']) {
+          if (isset($page['actions'])) {
           ?>
           <div id="actions">
             <?php
@@ -45,15 +48,15 @@ include __DIR__ . '/../inc/nav.html.php';
             ?>
           </div>
           <?php } ?>
-        </section>  
+        </section>
         
       </article>
     </section>
     <!-- end left column -->
-    <?php //include 'inc/aside.php'; ?>
+    <?php include 'aside.inc.html.php'; ?>
     <!-- end outer div and main -->
     
 </main>
 <hr class="divider" />
 
-<?php include __DIR__ . '/../inc/footer.html.php'; ?>
+<?php include 'footer.inc.html.php'; ?>

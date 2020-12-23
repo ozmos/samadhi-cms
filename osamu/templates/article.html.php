@@ -8,8 +8,9 @@
 //    alt
 //    content
 // }
-include __DIR__ . '/../inc/header.html.php';
-include __DIR__ . '/../inc/nav.html.php'; 
+include $_SERVER['DOCUMENT_ROOT'] . '/templates/header.inc.html.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/templates/nav.inc.html.php'; 
+// include $_SERVER['DOCUMENT_ROOT'] . '/includes/markdown.inc.php';
 ?>
 
 <main class="outer flex wrap">
@@ -20,27 +21,27 @@ include __DIR__ . '/../inc/nav.html.php';
       <!-- article header -->
         <header class="article-header flex wrap">
           <section>
-            <h2 class="art-heading">
+            <h1 class="art-heading">
               <?php echo $page['title']; ?>
-            </h2>
+            </h1>
           </section>
           <?php if (isset($page['img'])): ?>
           <section class="image">
-            <img class="featured-img" src="images/<?php echo $page['img'];?>" alt="<?php echo $page['alt'];?>" height="660" width="990" />
+            <img class="featured-img" src="/content/images/<?php echo $page['img'];?>" alt="<?php echo $page['alt'];?>" height="660" width="990" />
           </section>
           <?php endif ?>
         </header>
         <!-- article content -->
         <section id="article-body">
           <?php 
-          echo $page['content']; 
+          markdownOut($page['content']); 
           ?>
         </section>  
         
       </article>
     </section>
     <!-- end left column -->
-    <?php include __DIR__ . '/../inc/aside.html.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/templates/aside.inc.html.php'; ?>
     <!-- end outer div and main -->
     
 </main>
@@ -50,4 +51,4 @@ include __DIR__ . '/../inc/nav.html.php';
 
 <hr class="divider" />
 
-<?php include __DIR__ . '/../inc/footer.html.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.inc.html.php'; ?>
